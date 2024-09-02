@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block title %}All Services{% endblock %}
+{% block content %}
+
+<div class="container mt-5">
+    <h2 class="mb-4">Service List</h2>
+    <a href="{% url 'create_service' %}" class="btn btn-primary mb-3">Create New Service</a>
+    <ul class="list-group">
+        {% for service in services %}
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <a href="{% url 'service_detail' service.pk %}">{{ service.service_name }}</a>
+                <div>
+                    <a href="{% url 'update_service' service.pk %}" class="btn btn-warning btn-sm me-2">Update</a>
+                    <a href="{% url 'delete_service' service.pk %}" class="btn btn-danger btn-sm me-2">Delete</a>
+                    <a href="{% url 'subscribe' pk=service.pk %}" class="btn btn-primary btn-sm">Buy</a>
+                </div>
+            </li>
+        {% empty %}
+            <li class="list-group-item">No services available.</li>
+        {% endfor %}
+    </ul>
+</div>
+{% endblock %}

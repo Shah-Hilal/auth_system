@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block title %}Create Service{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <h2>Create Service</h2>
+    <form method="post" enctype="multipart/form-data" class="mt-4">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-primary">Create Service</button>
+        <a href="{% url 'service_list' %}" class="btn btn-secondary ms-2">Back to Service List</a>
+    </form>
+</div>
+{% endblock %}

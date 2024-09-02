@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}Update Service{% endblock %}
+{% block content %}
+    <div class="container mt-5">
+        <h2 class="mb-4">Update Service</h2>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="{{ form.service_name.id_for_label }}" class="form-label">{{ form.service_name.label }}</label>
+                {{ form.service_name }}
+            </div>
+            <div class="mb-3">
+                <label for="{{ form.payment_terms.id_for_label }}" class="form-label">{{ form.payment_terms.label }}</label>
+                {{ form.payment_terms }}
+            </div>
+            <div class="mb-3">
+                <label for="{{ form.service_price.id_for_label }}" class="form-label">{{ form.service_price.label }}</label>
+                {{ form.service_price }}
+            </div>
+            <div class="mb-3">
+                <label for="{{ form.service_package.id_for_label }}" class="form-label">{{ form.service_package.label }}</label>
+                {{ form.service_package }}
+            </div>
+            <div class="mb-3">
+                <label for="{{ form.service_tax.id_for_label }}" class="form-label">{{ form.service_tax.label }}</label>
+                {{ form.service_tax }}
+            </div>
+            <div class="mb-3">
+                <label for="{{ form.service_image.id_for_label }}" class="form-label">{{ form.service_image.label }}</label>
+                {{ form.service_image }}
+            </div>
+            <button type="submit" class="btn btn-primary">Update Service</button>
+        </form>
+        <a href="{% url 'service_list' %}" class="btn btn-secondary mt-3">Back to Service List</a>
+    </div>
+    {% endblock %}

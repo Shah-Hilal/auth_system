@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Payment</title>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+<body>
+    <script>
+        var options = {
+            "key": "{{ key_id }}", // Your Razorpay Key ID
+            "amount": "{{ amount }}", // Amount in paise
+            "currency": "INR",
+            "name": "IT Services",
+            "description": "Payment for subscription",
+            "order_id": "{{ order_id }}", // Order ID created by Razorpay
+            "handler": function (response){
+                // Handle payment success
+                var xhr = new XMLHttpRequest();
+                xhr.open("POST", "{% url 'callback' %}", true);
+                xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+                xhr.send("razorpay_payment_id=" + response.razorpay_payment_id + "&razorpay_order_id=" + response.razorpay_order_id + "&razorpay_signature=" + response.razorpay_signature + "&subscription_id={{ order_id }}");
+            },
+            "prefill": {
+                "name": "",
+                "email": "",
+                "contact": ""
+            },
+            "theme": {
+                "color": "#3399cc"
+            }
+        };
+        var rzp1 = new Razorpay(options);
+        rzp1.open();
+    </script>
+</body>
+</html>
